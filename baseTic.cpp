@@ -3,7 +3,11 @@ using namespace std;
 
 map<int, int> mp { {0,0}, {1,0}, {2,0}, {3,0}, {4,0}, {5,0}, {6,0}, {7,0} };
 vector<vector<int>> visited(3, vector<int>(3, 0));
+
 bool retry = 0, complete = false;
+
+bool retry = false;
+
 
 void dispMaze(){
     
