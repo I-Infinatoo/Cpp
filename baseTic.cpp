@@ -3,7 +3,7 @@ using namespace std;
 
 map<int, int> mp { {0,0}, {1,0}, {2,0}, {3,0}, {4,0}, {5,0}, {6,0}, {7,0} };
 vector<vector<int>> visited(3, vector<int>(3, 0));
-bool retry = 0;
+bool retry = 0, complete = false;
 
 void dispMaze(){
     
@@ -26,7 +26,7 @@ void dispMaze(){
                 cout << "0" ;
             }
             if(i==2&& j==0) {
-                cout << "1" ;
+                cout << "1" ;  
             }
             if(i==4&& j==0) {
                 cout << "2" ;
@@ -90,6 +90,19 @@ bool isVisited(int r, int c) {
     return visited[r][c]; 
 }
 
+void check1(int a, int b, int c = -1, int d = -1){
+
+    if(mp[a]==3 || mp[b]==3 || mp[c]==3 || mp[d]==3) {
+        cout <<"\nPlayer 1[X] wins\n";
+        complete = true;
+    }
+    if(mp[a]==-3 || mp[b]==-3 || mp[c]==-3 || mp[d]==-3) {
+        cout <<"Player 2[O] wins\n";
+        complete = true;
+    }
+    return;
+}
+
 void pass(int p, int r, int c) {
 
     if( isVisited(r,c) ) {
@@ -100,19 +113,19 @@ void pass(int p, int r, int c) {
     }
 
     if( r == 0 ) {
-        if( c == 0 )  { funChange(p, 0,3,6); }
-        if( c == 1 )  { funChange(p, 1,3); }
-        if( c == 2 )  { funChange(p, 2,3,7); }
+        if( c == 0 )  { funChange(p, 0,3,6); check1(0,3,6); }
+        if( c == 1 )  { funChange(p, 1,3); check1(1,3); }
+        if( c == 2 )  { funChange(p, 2,3,7); check1(2,3,7); }
     }
     if( r == 1 ) {
-        if( c == 0 )  { funChange(p, 0,4); }
-        if( c == 1 )  { funChange(p, 1,4,6,7); }
-        if( c == 2 )  { funChange(p, 2,4); }
+        if( c == 0 )  { funChange(p, 0,4); check1(0,4); }
+        if( c == 1 )  { funChange(p, 1,4,6,7); check1(1,4,6,7); }
+        if( c == 2 )  { funChange(p, 2,4); check1(2,4); }
     }
     if( r == 3 ) {
-        if( c == 0 )  { funChange(p, 0,5,7); }
-        if( c == 1 )  { funChange(p, 1,5); }
-        if( c == 2 )  { funChange(p, 2,5,6); }
+        if( c == 0 )  { funChange(p, 0,5,7); check1(0,5,7); }
+        if( c == 1 )  { funChange(p, 1,5); check1(1,5); }
+        if( c == 2 )  { funChange(p, 2,5,6); check1(2,5,6); }
     }      
 
     visited[r][c] = 1;
@@ -138,8 +151,8 @@ void play () {
                 retry = false;
                 continue;
             }
-
-            if(check()) {break;}
+            if(complete) {break;}
+            //if(check()) {break;}
         }
 
         if(i%2!=0) {
@@ -155,7 +168,8 @@ void play () {
                 continue;
             }
 
-            if(check()) {break;}
+            if(complete) {break;}
+            //if(check()) {break;}
         }
     }
 
