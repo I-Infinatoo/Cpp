@@ -66,29 +66,6 @@ void funChange(int player, int a, int b, int c = -1, int d = -1) {
     return;
 }
 
-bool check() {
-
-    cout << "\n" ;
-    for(int i=0; i<mp.size(); i++) {
-        
-        if( mp[i] == 3 ) {
-            
-            cout <<"Player 1[X] wins\n";
-            
-            return true;
-        }
-        
-        if( mp[i] == -3 ) {
-            
-            cout <<"Player 2[O] wins\n";
-            
-            return true;
-        }
-    }
-
-    return false;
-} 
-
 bool isVisited(int r, int c) {
     
     return visited[r][c]; 
@@ -156,7 +133,6 @@ void play () {
                 continue;
             }
             if(complete) {break;}
-            //if(check()) {break;}
         }
 
         if(i%2!=0) {
@@ -173,7 +149,6 @@ void play () {
             }
 
             if(complete) {break;}
-            //if(check()) {break;}
         }
     }
 
