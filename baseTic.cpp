@@ -123,8 +123,8 @@ void pass(int p, int r, int c) {
     if( isVisited(r,c) ) {
         //already filled
         
-        gotoxy(9,14,0);
-        cout << "Enter Valid move!!  Retry!!";
+        // gotoxy(9,14,0);
+        // cout << "Enter Valid move!!  Retry!!";
         
         retry = true;
         return;
@@ -151,6 +151,10 @@ void pass(int p, int r, int c) {
     return;  
 }
 
+bool check(int row, int col){
+    return (row<3 and row >=0 and col>=0 and col<3)? true : false;
+}
+
 void play () {
 
     int row, col, temp;
@@ -169,11 +173,15 @@ void play () {
             gotoxy(9,14,0);
             cout << "                           ";
             
-            pass(1, row, col);
-
+            if(check(row, col)) pass(1, row, col); 
+            else retry = true;    
+            
             if(retry) {     //this will allow the player to retry, not valid move
                 i--;
                 retry = false;
+                
+                gotoxy(9,14,0);
+                cout << "Enter Valid move!!  Retry!!";
                 
                 continue;
             }
@@ -194,12 +202,16 @@ void play () {
             gotoxy(9,14,0);
             cout << "                           ";
             
-            pass(-1, row, col);
-
+            if(check(row, col)) pass(-1, row, col); 
+            else retry = true;    
+            
             if(retry) {
                 i--;
                 retry = false;
                 
+                gotoxy(9,14,0);
+                cout << "Enter Valid move!!  Retry!!";
+
                 continue;
             }
 
@@ -207,6 +219,10 @@ void play () {
 
             if(complete) {break;}
         }
+    }
+    if(!complete) {
+        gotoxy(9,14,0);
+        cout << "Draw!\n\tBetter Luck Next time!!";
     }
 
     return;
