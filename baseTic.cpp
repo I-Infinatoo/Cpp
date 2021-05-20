@@ -122,8 +122,10 @@ void pass(int p, int r, int c) {
 
     if( isVisited(r,c) ) {
         //already filled
+        
         gotoxy(9,14,0);
         cout << "Enter Valid move!!  Retry!!";
+        
         retry = true;
         return;
     }
@@ -210,7 +212,6 @@ void play () {
     return;
 
 }
-
 
 int main () {
 
