@@ -6,8 +6,36 @@ vector<vector<int>> visited(3, vector<int>(3, 0));
 
 bool retry = 0, complete = false;
 
-bool retry = false;
+void update(int r, int c, char p) {
+    if( r == 0 ) {    //printf("%c[%d;%df",0x1B,y,x);
+        if( c == 0 )  { printf("%c[%d;%df",0x1B,2,4); cout << p; }
+        if( c == 1 )  { printf("%c[%d;%df",0x1B,2,9); cout << p; }
+        if( c == 2 )  { printf("%c[%d;%df",0x1B,2,15); cout << p; }
+    }
+    if( r == 1 ) {
+        if( c == 0 )  { printf("%c[%d;%df",0x1B,4,4); cout << p; }
+        if( c == 1 )  { printf("%c[%d;%df",0x1B,4,9); cout << p; }
+        if( c == 2 )  { printf("%c[%d;%df",0x1B,4,15); cout << p; }
+    }
+    if( r == 2 ) {
+        if( c == 0 )  { printf("%c[%d;%df",0x1B,6,4); cout << p; }
+        if( c == 1 )  { printf("%c[%d;%df",0x1B,6,9); cout << p; }
+        if( c == 2 )  { printf("%c[%d;%df",0x1B,6,15); cout << p; }
+    }
+}
 
+
+void gotoxy(int x,int y, int p=0){
+    
+    if(p==0) {
+        printf("%c[%d;%df",0x1B,y,x);
+        return;
+    }
+
+    update(x, y, p);
+    if(p==1) update(x, y, 'X') ;
+    if(p==-1) update(x, y, 'O') ;
+}
 
 void dispMaze(){
     
@@ -66,29 +94,6 @@ void funChange(int player, int a, int b, int c = -1, int d = -1) {
     return;
 }
 
-bool check() {
-
-    cout << "\n" ;
-    for(int i=0; i<mp.size(); i++) {
-        
-        if( mp[i] == 3 ) {
-            
-            cout <<"Player 1[X] wins\n";
-            
-            return true;
-        }
-        
-        if( mp[i] == -3 ) {
-            
-            cout <<"Player 2[O] wins\n";
-            
-            return true;
-        }
-    }
-
-    return false;
-} 
-
 bool isVisited(int r, int c) {
     
     return visited[r][c]; 
@@ -97,11 +102,17 @@ bool isVisited(int r, int c) {
 void check1(int a, int b, int c = -1, int d = -1){
 
     if(mp[a]==3 || mp[b]==3 || mp[c]==3 || mp[d]==3) {
-        cout <<"\nPlayer 1[X] wins\n";
+        
+        gotoxy(9,15,0);
+        
+        cout <<"Player 1[X] wins";
         complete = true;
     }
     if(mp[a]==-3 || mp[b]==-3 || mp[c]==-3 || mp[d]==-3) {
-        cout <<"Player 2[O] wins\n";
+        
+        gotoxy(9,15,0);
+
+        cout <<"Player 2[O] wins";
         complete = true;
     }
     return;
@@ -111,7 +122,8 @@ void pass(int p, int r, int c) {
 
     if( isVisited(r,c) ) {
         //already filled
-        cout << "\tEnter Valid move!!  Retry!!\n";
+        gotoxy(9,14,0);
+        cout << "Enter Valid move!!  Retry!!";
         retry = true;
         return;
     }
@@ -126,7 +138,7 @@ void pass(int p, int r, int c) {
         if( c == 1 )  { funChange(p, 1,4,6,7); check1(1,4,6,7); }
         if( c == 2 )  { funChange(p, 2,4); check1(2,4); }
     }
-    if( r == 3 ) {
+    if( r == 2 ) {
         if( c == 0 )  { funChange(p, 0,5,7); check1(0,5,7); }
         if( c == 1 )  { funChange(p, 1,5); check1(1,5); }
         if( c == 2 )  { funChange(p, 2,5,6); check1(2,5,6); }
@@ -140,40 +152,60 @@ void pass(int p, int r, int c) {
 void play () {
 
     int row, col, temp;
-
+    
     for(int i =0; i<9; i++) {
         
         if(i%2==0) {
             //player 1's turn
-            cout << "\nPlayer 1[X]: Enter row and Column:\t" ;
+            
+            gotoxy(9-9, 12, 0);
+            cout << "Player 1[X]: Enter row and Column:\t" ;
             cin >> row >> col;
 
+                
+            //removing retry message
+            gotoxy(9,14,0);
+            cout << "                           ";
+            
             pass(1, row, col);
 
             if(retry) {     //this will allow the player to retry, not valid move
                 i--;
                 retry = false;
+                
                 continue;
             }
+
+            gotoxy(row, col, 1);
+
             if(complete) {break;}
-            //if(check()) {break;}
+            
         }
 
         if(i%2!=0) {
             //player 2's turn
+
+            gotoxy(9, 12, 0);
             cout << "\nPlayer 2[O]: Enter row and Column:\t" ;
             cin >> row >> col;
 
+            //removing retry message
+            gotoxy(9,14,0);
+            cout << "                           ";
+            
             pass(-1, row, col);
 
             if(retry) {
                 i--;
                 retry = false;
+                
                 continue;
             }
 
+            gotoxy(row, col, -1);
+
             if(complete) {break;}
-            //if(check()) {break;}
+            
         }
     }
 
@@ -184,9 +216,10 @@ void play () {
 
 int main () {
 
+    system("clear");
     dispMaze();
 
     play();
-
+    gotoxy(0, 18, 0);
     return 0;
 }
