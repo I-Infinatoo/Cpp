@@ -179,7 +179,6 @@ void play () {
             gotoxy(row, col, 1);
 
             if(complete) {break;}
-            
         }
 
         if(i%2!=0) {
@@ -205,7 +204,6 @@ void play () {
             gotoxy(row, col, -1);
 
             if(complete) {break;}
-            
         }
     }
 
