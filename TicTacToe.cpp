@@ -19,11 +19,16 @@ class TicTacToe {
 
 };  
 
-class maze : public TicTacToe {
+class DispMaze : public TicTacToe {
 
+    // protected:
+
+    // vector<vector<char>> visited( n, vector<char>(n, ' '));
+    
+    //     vector<vector<char>> maze(n, vector<char>(n, ' '));
     public:
     
-    maze() {
+    DispMaze() {
 
         vector<vector<char>> visited( n, vector<char>(n, ' '));
     
@@ -32,6 +37,15 @@ class maze : public TicTacToe {
         maze[0][1] = maze[0][3] = maze[2][1] = maze[2][3] = maze[4][1] = maze[4][3] = '|'; 
         maze[1][0] = maze[1][2] = maze[1][4] = maze[3][0] = maze[3][2] = maze[3][4] = '_';
 
+        // for(int i=0; i<n; i++) {
+        //     for(int j=0; j<n; j++) {
+        //         cout << maze[i][j] << " ";
+        //     }cout << "\n" ;
+        // }
+    
+    }
+
+    void display() {
         for(int i=0; i<n; i++) {
             for(int j=0; j<n; j++) {
                 cout << maze[i][j] << " ";
@@ -41,11 +55,12 @@ class maze : public TicTacToe {
     }
 };
 
-class player1 : public TicTacToe {
+class player1 : public DispMaze {
+    public:
 
 };
 
-class player2 : public TicTacToe {
+class player2 : public DispMaze {
 
 };
 
