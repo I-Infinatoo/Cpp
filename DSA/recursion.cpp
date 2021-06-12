@@ -74,23 +74,5 @@ long long int power(int a, int b) {// a^b   this is an optimised approach O(log 
 int main() {
 
     cout << power(2,3);
-    
-    
-    // int *p = (int*)malloc(sizeof(int));
-    // *p = 10;
-    // cout << p<< " " ;
-
-    // int *q = p;
-    // cout << q << " ";
-
-    // free(p);
-
-    // *p=*p+1;
-    // cout << *q << " " << *p << endl;
-    // cout << q << " ";
-
-    // *q = 10;
-    // cout << *q << " " << *p;
-    
     return 0;
 }
