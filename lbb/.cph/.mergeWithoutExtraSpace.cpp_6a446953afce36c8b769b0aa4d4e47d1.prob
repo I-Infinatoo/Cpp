@@ -1,0 +1,1 @@
+{"name":"Local: mergeWithoutExtraSpace","url":"/home/infi/Desktop/VSCode/lbb/mergeWithoutExtraSpace.cpp","tests":[{"id":1626581122551,"input":"","output":"1 2\n3 4 5 7 8"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/infi/Desktop/VSCode/lbb/mergeWithoutExtraSpace.cpp","group":"local","local":true}
