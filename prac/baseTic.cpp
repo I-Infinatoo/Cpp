@@ -198,6 +198,13 @@ void play () {
             cout << "\nPlayer 2[O]: Enter row and Column:\t" ;
             cin >> row >> col;
 
+            //clearing the screen after taking input or better look
+            gotoxy(9, 12, 0);
+            cout << "\n                                             " ;   
+            gotoxy(9-9, 12, 0);
+            cout << "                                                      " ;
+             
+            
             //removing retry message
             gotoxy(9,14,0);
             cout << "                           ";
