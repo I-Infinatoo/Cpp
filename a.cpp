@@ -32,7 +32,7 @@ int palindromeIndex(string s) {
 
 int main()
 {
-    cout << palindromeIndex("fruits");
+    cout << palindromeIndex("hgygsvlfcwnswtuhmyaljkqlqjjqlqkjlaymhutwsnwcwflvsgygh");
 
     return 0;
 }
