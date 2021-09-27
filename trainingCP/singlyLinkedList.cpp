@@ -109,9 +109,54 @@ void printRevUsingRecurssion(node *start) {
     std::cout << start->data << " " ;
 }
 
-void reverseRecurssion(node *&start) {
+node* reverseRecurssion(node *&start) {
+    
+    if(start->next==NULL or start==NULL){
+        // startRef=start;
+        return start;
+    }
+
+    node* newHead = reverseRecurssion(start->next);
+    start->next->next=start;
+    start->next=NULL;
+
+    return newHead;
     
 }
+
+node* midNodeUsingDoublePointerIteration(node *start){
+    if(start==NULL) {
+        return start;
+    }
+
+    node *fast=start, *slow=start;
+    while(fast!=NULL and fast->next!=NULL){
+        fast=fast->next->next;
+        slow=slow->next; 
+    }
+
+    return slow;
+}
+
+void nthNodeFromEnd(node *start, int &n) {
+    if(start==NULL) {
+        return;
+    }
+
+    nthNodeFromEnd(start->next, n);
+
+    if(--n == 0) {
+        std::cout << start->data << " ";
+    }
+}
+
+// node* midNodeUsingSinglePointerIteration(node* start) {
+//     if(start==NULL){
+//         return start;
+//     }
+
+// }
+
 
 int main () {
 
@@ -121,14 +166,17 @@ int main () {
     insertEnd(head, 20);
     insertEnd(head, 30);
     insertEnd(head, 40);
-    insertEnd(head, 50);
+    // insertEnd(head, 50);
 
     // display(head);
     
     // printUsingRecurssion(head);
-    printRevUsingRecurssion(head);
-    // display(head);
+    // printRevUsingRecurssion(head);
+    
+    // head=reverseRecurssion(head);
+    display(head);
 
+    // std::cout << (midNodeUsingDoublePointerIteration(head))->data << "\n"; 
     // reverseIteration(head);
     // display(head);
 
