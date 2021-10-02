@@ -3,25 +3,25 @@
 class node {
     public:
     int power;
-    int data;
+    int cofficient;
     node *next;
 
     node() 
-    : power(0), data(0), next(NULL)
+    : power(0), cofficient(0), next(NULL)
     {
 
     }
-    node(int data, int power) 
-    : power(power), data(data), next(NULL)
+    node(int cofficient, int power) 
+    : power(power), cofficient(cofficient), next(NULL)
     {
 
     }
     
 };
 
-void insertEnd(node* &start, int data, int power) {
+void insertEnd(node* &start, int cofficient, int power) {
     
-    node* newNode = new node(data, power);
+    node* newNode = new node(cofficient, power);
 
     if(start==NULL){
         start=newNode;
@@ -46,7 +46,10 @@ void display(node *start) {
 
     // node *temp = start;
     while(start!=NULL){     //here we are using start to iterate because we have received it by value not by ref.
-        std::cout << start->data << "^" << start->power << " ";
+        if(start->next==NULL)
+            std::cout << start->cofficient << "x^(" << start->power << ") ";
+        else 
+            std::cout << start->cofficient << "x^(" << start->power << ") + ";
         start=start->next;
     } 
 
@@ -59,7 +62,8 @@ node* addPolynomial(node *head, node *head1){
 
     while(head!=NULL and head1!=NULL){
         if(head->power==head1->power){
-            node *tempNode= new node(head->data+head1->data, head->power);
+            node *tempNode= new node( head->cofficient+head1->cofficient, head->power);
+            
             tempResultPointer->next=tempNode;
             head=head->next;
             head1=head1->next;
@@ -98,10 +102,14 @@ int main() {
     insertEnd(head1, 5, 1);
     insertEnd(head1, 6, 0);
 
+    std::cout << "Polynomial 1: ";
     display(head);
+
+    std::cout << "\nPolynomial 1: ";
     display(head1);
 
     node *result=addPolynomial(head, head1);
+    std::cout << "\nAddition of the Polynomial: ";
     display(result);
 
     return 0;

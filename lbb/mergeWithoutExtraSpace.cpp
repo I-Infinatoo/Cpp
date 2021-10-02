@@ -52,7 +52,7 @@ void merge(int a[], int b[], int n, int m){
 
 int main() {
 
-    int a[]={1,5};
+    int a[]={1,0};
     int b[]={2,3,4,7,8};
 
     int n=sizeof(a)/sizeof(a[0]);
